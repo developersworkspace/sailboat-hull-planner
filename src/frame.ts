@@ -46,11 +46,36 @@ export class Frame {
             ${this.toLineString(pointAX, pointAY, pointEX, pointEY, factor)}
             ${this.toLineString(pointEX, pointEY, pointFX, pointFY, factor)}
             ${this.toLineString(pointFX, pointFY, pointDX, pointDY, factor)}
+            ${this.centerBeam(2, 2, factor)}
             <text text-anchor="middle" x="${this.getWidth(factor) / 2}" y="${this.getHeight(factor) / 2}">Frame ${n}</text>`;
     }
 
     protected toLineString(x1: number, y1: number, x2: number, y2: number, factor: number): string {
         return `<line x1="${x1 * factor}" y1="${y1 * factor}" x2="${x2 * factor}" y2="${y2 * factor}" style="stroke:black;stroke-width:1" />`;
+    }
+
+    protected centerBeam(height: number, width: number, factor): string {
+        const angle: number = Math.atan(this.heights[0] / this.widths[0]);
+
+        const pointAX: number = this.widths[0] - width;
+        const pointAY: number = this.heights[0] - (Math.tan(angle) * (this.widths[0] - width));
+
+        const pointBX: number = this.widths[0] - width;
+        const pointBY: number = this.heights[0] - (Math.tan(angle) * (this.widths[0] - width)) + height;
+
+        const pointCX: number = this.widths[0] + width;
+        const pointCY: number = this.heights[0] - (Math.tan(angle) * (this.widths[0] - width)) + height;
+
+        const pointDX: number = this.widths[0] + width;
+        const pointDY: number = this.heights[0] - (Math.tan(angle) * (this.widths[0] - width));
+
+        return `${this.toLineString(pointAX, pointAY, pointBX, pointBY, factor)}
+        ${this.toLineString(pointBX, pointBY, pointCX, pointCY, factor)}
+        ${this.toLineString(pointCX, pointCY, pointDX, pointDY, factor)}`;
+    }
+
+    protected radiansToDegress(radians: number): number {
+        return radians * 180 / Math.PI;
     }
 
 }

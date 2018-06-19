@@ -1,10 +1,15 @@
 import * as fs from 'fs';
 import { Frame } from './frame';
 
-const factor: number = 5;
+const factor: number = 10;
 
-const height: number = 500;
-const width: number = 500;
+const paperHeight: number = 11.69;
+const paperWidth: number = 8.27;
+
+const dpi: number = 92;
+
+const height: number = paperHeight * dpi;
+const width: number = paperWidth * dpi;
 
 const frames: Frame[] = [
     new Frame(
@@ -34,14 +39,15 @@ for (let index = 0; index < frames.length; index ++) {
 
     const svg: string = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="${height}" width="${width}">
+        <line x1="10" y1="10" x2="10" y2="${dpi + 10}" style="stroke:black;stroke-width:1" />
         <g transform="translate(${(width - frame.getWidth(factor)) / 2}, ${(height - frame.getHeight(factor)) / 2})">
             ${frame.toString(factor, index + 1)}
         </g>
     </svg>`;
 
-    if (fs.existsSync(`./frame-${index + 1}.svg`)) {
-        fs.unlinkSync(`./frame-${index + 1}.svg`);
+    if (fs.existsSync(`./dist/frame-${index + 1}.svg`)) {
+        fs.unlinkSync(`./dist/frame-${index + 1}.svg`);
     }
 
-    fs.writeFileSync(`./frame-${index + 1}.svg`, svg, 'utf8');
+    fs.writeFileSync(`./dist/frame-${index + 1}.svg`, svg, 'utf8');
 }
