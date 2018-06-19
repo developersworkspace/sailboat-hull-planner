@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/developersworkspace/sailboat-hull-planner#readme",
   "devDependencies": {
+    "@types/node": "^10.3.4",
     "gulp": "^3.9.1",
     "run-sequence": "^2.2.1"
   }

@@ -15,7 +15,7 @@ export class Frame {
         return (this.widths[0] + this.widths[0]) * factor;
     }
 
-    public toString(factor: number): string {
+    public toString(factor: number, n: number): string {
         // center top
         const pointAX: number = this.widths[0];
         const pointAY: number = 0;
@@ -40,18 +40,17 @@ export class Frame {
         const pointFX: number = this.widths[0] + this.widths[1];
         const pointFY: number = this.heights[0] + this.heights[1];
 
-        return `
-            ${this.toLineString(pointAX, pointAY, pointBX, pointBY, factor)}
+        return `${this.toLineString(pointAX, pointAY, pointBX, pointBY, factor)}
             ${this.toLineString(pointBX, pointBY, pointCX, pointCY, factor)}
             ${this.toLineString(pointCX, pointCY, pointDX, pointDY, factor)}
             ${this.toLineString(pointAX, pointAY, pointEX, pointEY, factor)}
             ${this.toLineString(pointEX, pointEY, pointFX, pointFY, factor)}
             ${this.toLineString(pointFX, pointFY, pointDX, pointDY, factor)}
-        `;
+            <text text-anchor="middle" x="${this.getWidth(factor) / 2}" y="${this.getHeight(factor) / 2}">Frame ${n}</text>`;
     }
 
     protected toLineString(x1: number, y1: number, x2: number, y2: number, factor: number): string {
-        return `<line x1="${x1 * factor}" y1="${y1 * factor}" x2="${x2 * factor}" y2="${y2 * factor}" style="stroke:rgb(255,0,0);stroke-width:2" />`;
+        return `<line x1="${x1 * factor}" y1="${y1 * factor}" x2="${x2 * factor}" y2="${y2 * factor}" style="stroke:black;stroke-width:1" />`;
     }
 
 }
