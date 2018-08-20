@@ -45,9 +45,9 @@ for (let index = 0; index < frames.length; index ++) {
         </g>
     </svg>`;
 
-    if (fs.existsSync(`./dist/frame-${index + 1}.svg`)) {
-        fs.unlinkSync(`./dist/frame-${index + 1}.svg`);
+    if (fs.existsSync(`./result/frame-${index + 1}.svg`)) {
+        fs.unlinkSync(`./result/frame-${index + 1}.svg`);
     }
 
-    fs.writeFileSync(`./dist/frame-${index + 1}.svg`, svg, 'utf8');
+    fs.writeFileSync(`./result/frame-${index + 1}.svg`, svg, 'utf8');
 }

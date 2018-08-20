@@ -3,11 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "gulp build & tsc",
-    "coverage": "npm run build & istanbul cover node_modules/mocha/bin/_mocha --root ./src ./dist/**/*.test.js",
-    "lint": "tslint ./src/**/*.ts --fix --exclude ./src/**/*.d.ts",
-    "start": "npm run build & node --inspect ./dist/app.js",
-    "test": "npm run build & mocha --timeout 30000 ./dist/**/*.test.js"
+    "build": "tsc",
+    "start": "npm run build & node --inspect ./dist/app.js"
   },
   "repository": {
     "type": "git",
@@ -20,8 +17,6 @@
   },
   "homepage": "https://github.com/developersworkspace/sailboat-hull-planner#readme",
   "devDependencies": {
-    "@types/node": "^10.3.4",
-    "gulp": "^3.9.1",
-    "run-sequence": "^2.2.1"
+    "@types/node": "^10.3.4"
   }
 }
